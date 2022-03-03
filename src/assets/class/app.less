@@ -1,0 +1,131 @@
+html,
+body,
+#app {
+    height: 100%;
+    width: 100%;
+}
+.h-full {
+    height: 100% !important;
+}
+
+.h-full-vh {
+    height: 100vh !important;
+}
+
+.app-login-bg {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-image: url('../images/bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.app-login {
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    margin-top: -181.5px;
+    width: 360px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    box-shadow: 0 12px 14px 0 rgba(20, 36, 87, 0.36);
+    overflow: hidden;
+}
+
+@sizeList: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 30, 40;
+each(@sizeList,{
+    .m-@{value}{
+        margin: (@value * 1px) !important;
+    }
+    .m-t-@{value} {
+        margin-top: (@value * 1px) !important;
+    }
+    .m-r-@{value} {
+        margin-right: (@value * 1px) !important;
+    }
+    .m-b-@{value} {
+        margin-bottom: (@value * 1px) !important;
+    }
+    .m-l-@{value} {
+        margin-left: (@value * 1px) !important;
+    }
+    .p-@{value} {
+        padding: (@value * 1px) !important;
+    }
+    .p-t-@{value} {
+        padding-top: (@value * 1px) !important;
+    }
+    .p-r-@{value} {
+        padding-right: (@value * 1px) !important;
+    }
+    .p-b-@{value} {
+        padding-bottom: (@value * 1px) !important;
+    }
+    .p-l-@{value} {
+        padding-left: (@value * 1px) !important;
+    }
+})
+
+
+
+/* flex布局 横向 */
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 左边对齐 */
+.justify-start {
+    justify-content: flex-start;
+}
+
+/* 横向居中对齐 */
+.justify-center {
+    justify-content: center;
+}
+
+/* 右边对齐 */
+.justify-end {
+    justify-content: flex-end;
+}
+
+/* flex布局 纵向 */
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 顶部对齐 */
+.flex-start {
+    align-items: flex-start;
+}
+
+/* 纵向居中对齐 */
+.flex-center {
+    align-items: center;
+}
+
+/* 底部对齐 */
+.flex-end {
+    align-items: flex-end;
+}
+
+/* 换行 */
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+/* 不换行 */
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+
+/* 子元素空间占位 */
+@flexList: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+
+each(@flexList, {
+.flex-@{value} {
+    flex: @value !important;
+}
+})

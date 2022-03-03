@@ -1,0 +1,155 @@
+import Vue from 'vue'
+
+import iview, {
+    Breadcrumb,
+    BreadcrumbItem,
+    Button,
+    Poptip,
+    Checkbox,
+    CheckboxGroup,
+    Col,
+    Carousel,
+    CarouselItem,
+    Collapse,
+    Panel,
+    // ColorPicker,
+    Content,
+    Drawer,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    Form,
+    FormItem,
+    Header,
+    Icon,
+    Input,
+    // InputNumber,
+    Scroll,
+    Sider,
+    Submenu,
+    Layout,
+    // LoadingBar,
+    Menu,
+    MenuItem,
+    Message,
+    Modal,
+    Option,
+    OptionGroup,
+    Page,
+    Row,
+    Select,
+    // Slider,
+    Table,
+    Tabs,
+    TabPane,
+    TimePicker,
+    Tree,
+    RadioGroup,
+    Radio,
+    Spin,
+    // Notice,
+    Card,
+    Badge,
+    Avatar,
+    Divider,
+    Tooltip,
+    Steps,
+    Step,
+    DatePicker,
+    // Cascader,
+    // Affix,
+    BackTop,
+    Switch,
+    Upload,
+    Tag
+} from 'view-design'
+Vue.prototype.$Modal = Modal
+
+Vue.prototype.$Message = Message
+
+Vue.prototype.$Spin = Spin
+
+// Vue.prototype.$Notice = Notice
+const components = {
+    Breadcrumb,
+    BreadcrumbItem,
+    Button,
+    Poptip,
+    Checkbox,
+    CheckboxGroup,
+    Carousel,
+    CarouselItem,
+    Col,
+    Collapse,
+    Panel,
+    // ColorPicker,
+    Content,
+    Drawer,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    Form,
+    FormItem,
+    Header,
+    Icon,
+    Input,
+    // InputNumber,
+    Scroll,
+    Sider,
+    Submenu,
+    Layout,
+    // LoadingBar,
+    Menu,
+    MenuItem,
+    Message,
+    Modal,
+    Option,
+    OptionGroup,
+    Page,
+    Row,
+    Select,
+    // Slider,
+    Table,
+    Tabs,
+    TabPane,
+    TimePicker,
+    Tree,
+    Upload,
+    Badge,
+    Avatar,
+    RadioGroup,
+    Radio,
+    Spin,
+    Divider,
+    // Notice,
+    Card,
+    Tooltip,
+    Steps,
+    Step,
+    BackTop,
+    // Cascader,
+    // Affix,
+    DatePicker,
+    // Switch,
+    Tag
+}
+
+const iviewModule = {
+    ...components,
+    // 添加别名(除了Switch、Circle在使用中必须是iSwitch、iCircle,其他都可以不加"i")
+    iCol: Col,
+    // iButton: Button,
+    iInput: Input,
+    iSwitch: Switch
+    // iSelect: Select
+}
+
+Table.props.noDataText = {
+    type: String,
+    default: '<div class="app-tip app-tip-empty p-t-20 p-b-20">暂无数据</div>'
+}
+
+// 循环注册全局组件
+Object.keys(iviewModule).forEach((key) => {
+    Vue.component(key, iviewModule[key])
+})

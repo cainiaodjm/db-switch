@@ -1,30 +1,59 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
-Vue.use(VueRouter);
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import store from '../store'
+Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-];
+    {
+        path: '/login',
+        meta: {
+            loggedIn: false
+        },
+        component: () => import(/* webpackChunkName: "login" */ '@/views/login/login.vue')
+    },
+    {
+        path: '/404',
+
+        component: () => import(/* webpackChunkName: "login" */ '@/views/login/login.vue')
+    },
+    {
+        path: '/main',
+        component: () => import(/* webpackChunkName: "main" */ '@/views/main/main.vue'),
+        children: [
+            {
+                path: 'db',
+                component: () => import(/* webpackChunkName: "db" */ '@/views/db/db.vue')
+            },
+            {
+                path: 'dbdetail',
+                component: () =>
+                    import(/* webpackChunkName: "dbdetail" */ '@/views/db/dbdetail.vue')
+            }
+        ]
+    },
+    {
+        path: '*',
+        component: () => import(/* webpackChunkName: "404" */ '@/views/404/404.vue')
+    }
+]
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
-});
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
+})
+router.onReady((to) => {
+    console.log(to)
+    const { state } = store
 
-export default router;
+    if (to.path === '/') {
+        if (state.loggedIn) {
+            store.commit('go', state.mainUrl[state.identity])
+        } else {
+            store.commit('go', state.loginUrl[state.identity])
+        }
+    } else if (to.meta.loggedIn !== false && !state.loggedIn) {
+        store.commit('go', state.loginUrl[state.identity])
+    }
+})
+export default router

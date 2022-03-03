@@ -1,11 +1,20 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+// const keys = ['avatar', 'userCode', 'userName']
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
-});
+// let loginInfo
+
+// try {
+//     loginInfo = JSON.parse(localStorage.getItem('loginInfo')) || {}
+// } catch (e) {
+//     loginInfo = {}
+// }
+
+// keys.map((key) => {
+//     state[key] = loginInfo[key] || ''
+// })
+import app from './app'
+
+Vue.use(Vuex)
+export default new Vuex.Store(app)
