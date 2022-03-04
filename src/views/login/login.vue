@@ -9,13 +9,16 @@
 <template>
     <div class="app-login-bg">
         <div class="app-login">
-            <div class="app-login-img">//</div>
-            <div class="app-login-body">
-                <Form ref="form" :model="form" :rules="rules">
-                    <div>
-                        <p>DB切换</p>
-                        <p>XXXXXX医院</p>
+            <div class="app-login-body-header">
+                        <p class="font-bold font-24 text-white">DB切换</p>
+                        <p class="font-400 font-16 text-white">浙江大学医学院附属第一医院</p>
                     </div>
+            <div class="app-login-body">
+                 <div class="text-primary-2 font-600 font-22 text-center m-t-50 m-b-30">
+                     账号密码登录
+                 </div>
+                <Form ref="form" :model="form" :rules="rules">
+                   
                     <FormItem prop="userCode">
                         <Input
                             type="text"
@@ -41,12 +44,12 @@
                         </Input>
                     </FormItem>
                 </Form>
-                <div class="flex m-b-24">
+                <!-- <div class="flex m-b-24">
                     <Checkbox v-model="remember" @on-change="rememberUser" class="flex-1">
                         记住用户名
                     </Checkbox>
                     <a>忘记密码？</a>
-                </div>
+                </div> -->
                 <Button
                     class="login-btn"
                     type="primary"
@@ -55,12 +58,15 @@
                 >
                     登 录
                 </Button>
+                <div class="text-second font-14 font-600 m-t-20 text-center m-b-28">忘记密码?</div>
+                <button @click="test">测试</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import {switchoverS2p} from '@/service/db'
 import sha256 from 'crypto-js/sha256'
 import { login } from '@/service/sysApi'
 import { setToken } from '@/utils/request'
@@ -122,7 +128,21 @@ export default {
         },
         rememberUser() {
             localStorage.setItem('remember', this.remember)
-        }
+        },
+        async test() {
+            const res = await switchoverS2p({
+                's_db_user': 'dbmaint',
+                's_db_pass': 'dbmaint123',
+                's_db_host': '192.168.10.96',
+                's_db_port': '1521',
+                's_db_sername': 'glhis',
+                's_os_host': '192.168.10.96',
+                's_os_user': 'root',
+                's_os_port': '22',
+                's_os_password': 'Hello1234'
+            })
+            console.log(res)
+        },
     }
 }
 </script>
@@ -140,14 +160,25 @@ export default {
 .app-login {
     position: absolute;
     display: flex;
-    left: 30%;
-    top: 50%;
+    flex-direction: column;
+    left: 57%;
+    top: 45%;
     margin-top: -181.5px;
-    width: 815px;
+    width: 400px;
     background: rgba(255, 255, 255, 0.96);
     border-radius: 20px;
     box-shadow: 0 12px 14px 0 rgba(20, 36, 87, 0.36);
     // overflow: hidden;
+}
+.app-login-body-header{
+    background: #1A6EAF;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 .app-login-title {
     background: #216aad;
@@ -178,7 +209,8 @@ export default {
     flex-shrink: 0;
 }
 .app-login-body {
-    padding: 33px 40px 40px;
+    padding: 0px 40px 40px;
+    width: 100%;
     /deep/ .ivu-input {
         height: 48px;
         border: 0;
@@ -198,8 +230,8 @@ export default {
     }
 }
 .login-btn {
-    width: 280px;
-    height: 48px;
+    width: 100%;
+    height: 40px;
     background: linear-gradient(270deg, #6448a1, #176faf);
     border-radius: 8px;
     box-shadow: 0 4px 12px 0 rgba(0, 7, 119, 0.5);

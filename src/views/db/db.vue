@@ -7,33 +7,39 @@
  * @FilePath: /inspect-demo/src/views/db/db.vue
 -->
 <template>
-    <div class="flex-col m-t-48">
-        <div class="flex justify-center m-t-40">
-            <Card class="w-540 m-r-40">
+    <div class="app-bg-primary c-h-48">
+<div class="flex-col m-t-48 ">
+       
+        <div class="flex justify-center m-t-40 ">
+            <Card class="w-360 m-r-40 db-card app-bg-frame app-bg-confirm">
+                <div class="flex justify-center text-white">
+                    <div class="db-icon">P</div>
+                    <div class="font-18 font-bold">主数据库</div>
+                </div>
                 <Form
                     ref="primaryForm"
                     :rules="rules"
-                    class="p-40"
+                   
                     :label-width="80"
                     :model="primary"
                 >
                     <div>主数据库</div>
-                    <FormItem label="数据库IP" prop="ip" class="m-r-16">
+                    <FormItem label="数据库IP" prop="ip" >
                         <Input v-model="primary.ip" placeholder="请输入"></Input>
                     </FormItem>
-                    <FormItem label="数据库名" class="m-r-16" prop="databaseName">
+                    <FormItem label="数据库名"  prop="databaseName">
                         <Input
                             v-model="primary.databaseName"
                             placeholder="请输入"
                         ></Input>
                     </FormItem>
-                    <FormItem label="端口号" class="m-r-16" prop="port">
+                    <FormItem label="端口号"  prop="port">
                         <Input v-model="primary.port" placeholder="请输入"></Input>
                     </FormItem>
-                    <FormItem label="账号" class="m-r-16" prop="account">
+                    <FormItem label="账号"  prop="account">
                         <Input v-model="primary.account" placeholder="请输入"></Input>
                     </FormItem>
-                    <FormItem label="密码" class="m-r-16" prop="password">
+                    <FormItem label="密码"  prop="password">
                         <Input v-model="primary.password" placeholder="请输入"></Input>
                     </FormItem>
 
@@ -50,12 +56,12 @@
                     </div>
                 </Form>
             </Card>
-            <Card class="w-540">
+            <Card class="w-360  db-card app-bg-frame app-bg-confirm">
                 <Form
                     ref="slaveForm"
                     :rules="rules"
-                    class="slave-form p-40"
-                    :label-width="120"
+                      
+                    :label-width="80"
                     :model="slave"
                 >
                     <div>从数据库</div>
@@ -89,7 +95,7 @@
                 </Form>
             </Card>
         </div>
-        <div class="flex justify-center m-t-40">
+        <div class="flex justify-center m-t-40 ">
             <Button
                 type="primary"
                 @click="handleToDetail"
@@ -98,6 +104,8 @@
             >
         </div>
     </div>
+    </div>
+    
 </template>
 <script>
 import { dbLogin } from '@/service/db'
@@ -255,7 +263,15 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.primary-form {
-    //
+.db-form{
+    padding: 30px 33px 0px 31px;
+}
+.db-card{
+    /deep/ .ivu-card-body{
+        padding: 30px 33px 0px 31px;
+    }
+}
+.db-icon{
+    background: #fff;
 }
 </style>

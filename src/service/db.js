@@ -30,3 +30,7 @@ export function dbLogin(data) {
 export function osLogin(data) {
     return axios.post('/oslogin', data)
 }
+
+export function switchoverS2p(data) {
+    return axios.post('/switchover_s2p', data)
+}

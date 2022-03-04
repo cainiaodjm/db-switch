@@ -1,7 +1,7 @@
 // 反向代理后端服务器地址
 // const target = 'http://192.168.140.29:9006'
 // const target = 'http://10.111.3.221:9006/'
-// const target = 'http://10.1.20.184:8999'
+// const target = 'http://10.1.20.184:9000'
 const target = 'http://192.168.196.165:9000'
 const proxy = {}
 

@@ -26,7 +26,7 @@ li {
     list-style: none;
 }
 
-@sizeList: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 30, 40, 48, 60, 72, 80, 88, 100;
+@sizeList: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24,28, 30, 40,50, 48, 60, 72, 80, 88, 100;
 
 each(@sizeList, {
 .m-@{value} {
@@ -132,6 +132,17 @@ each(@lineHeightList, {
     line-height: (@value * 1px) !important;
 }
 })
+
+@calcHeigtList: 48,72,88,100;
+
+each(@calcHeigtList, {
+.c-h-@{value} {
+    height:calc(100% - (@value * 1px))  !important;
+}
+})
+
+
+
 /* stylelint-disable-next-line */
 .h-full {
     height: 100% !important;
@@ -141,7 +152,7 @@ each(@lineHeightList, {
     height: 100vh !important;
 }
 
-@fontList: 12, 14, 16, 18, 20, 24;
+@fontList: 12, 14, 16, 18, 20,22, 24;
 
 each(@fontList, {
 .font-@{value} {
@@ -295,13 +306,21 @@ each(@flexList, {
 .text-warn {
     color: #f9ad44 !important;
 }
-
+.text-white{
+    color: #fff;
+}
 .text-desc {
     color: #999 !important;
 }
 
 .text-error {
     color: @error-color !important;
+}
+.text-primary-2{
+    color: @primay-text-color !important
+}
+.text-second{
+    color: #3B78D4;
 }
 
 .bg-white {
@@ -1152,4 +1171,18 @@ each(@flexList, {
             align-items: center;
         }
     }
+}
+.app-bg-primary{
+    background-image: url('../../assets/images/bg-primary.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.app-bg-frame{
+    border: none;
+    background: transparent;
+}
+.app-bg-confirm{
+    background-image: url('../../assets/images/bg-frame/bg-frame-confirm.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
