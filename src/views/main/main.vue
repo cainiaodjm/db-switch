@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-16 16:46:25
- * @LastEditTime: 2022-03-02 16:42:19
+ * @LastEditTime: 2022-03-04 10:58:44
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /inspect-demo/src/views/main/main.vue
@@ -377,7 +377,7 @@ export default {
 /deep/ .ivu-layout-header {
     height: 48px;
     line-height: 48px;
-    background: linear-gradient(270deg, #291e40, #0a324e);
+    background-image: linear-gradient(-21deg, #192347 0%, #26376d 100%);
     padding: 0;
     position: relative;
     z-index: 1;

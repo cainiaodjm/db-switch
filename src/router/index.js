@@ -52,8 +52,6 @@ router.onReady((to) => {
         } else {
             store.commit('go', state.loginUrl[state.identity])
         }
-    } else if (to.meta.loggedIn !== false && !state.loggedIn) {
-        store.commit('go', state.loginUrl[state.identity])
     }
 })
 export default router

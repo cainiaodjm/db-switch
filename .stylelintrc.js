@@ -68,7 +68,7 @@ module.exports = {
         // 不允许低特异性的选择器出现在覆盖高特异性的选择器之后
         'no-descending-specificity': null,
         // 限制选择器中相邻空行的数量
-        'selector-max-empty-lines': 1,
+        'selector-max-empty-lines': null,
         'length-zero-no-unit': null
     }
 }
