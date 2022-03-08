@@ -10,10 +10,16 @@
             </span>
             <Divider type="vertical" class="m-r-16 m-l-16" />
             <span class="app-back-title">详情</span>
+            <!-- <Button @click="handleSwitchDone">测试</Button> -->
         </div>
         <!-- DB状态内容 -->
         <div class="p-t-116">
-            <div class="flex justify-center">
+            <div
+                class="flex justify-center"
+                :style="{
+                    'flex-direction': isSwitchEnd ? 'row-reverse' : 'row'
+                }"
+            >
                 <Card
                     style="width: 360px; height: 300px"
                     class="app-bg-status app-bg-frame"
@@ -49,11 +55,29 @@
                         </Row>
                     </div>
                 </Card>
-                <div class="p-s">
+                <div
+                    class="p-s"
+                    :style="{
+                        'flex-direction': isSwitchEnd ? 'row-reverse' : 'row'
+                    }"
+                >
                     <div class="db">P</div>
                     <div class="arrow">
-                        <div class="app-icon-arrow-success"></div>
-                        <div class="app-icon-arrow-success m-t-12"></div>
+                        <div
+                            :class="[
+                                isSwitchEnd
+                                    ? 'app-icon-arrow-success-flip'
+                                    : 'app-icon-arrow-success'
+                            ]"
+                        ></div>
+                        <div
+                            :class="[
+                                isSwitchEnd
+                                    ? 'app-icon-arrow-success-flip'
+                                    : 'app-icon-arrow-success',
+                                'm-t-12'
+                            ]"
+                        ></div>
                     </div>
                     <div class="db">S</div>
                 </div>
@@ -128,7 +152,12 @@
 
                 <app-collapse :height="142">
                     <app-panel>
-                        <div class="flex justify-between p-r-30 p-l-30">
+                        <div
+                            class="flex justify-between p-r-30 p-l-30"
+                            :style="{
+                                'flex-direction': isSwitchEnd ? 'row-reverse' : 'row'
+                            }"
+                        >
                             <Form class="app-descriptions w-420" :label-width="200">
                                 <div class="switch-title">
                                     <span>[P] 主数据库</span>
@@ -221,7 +250,8 @@
                     <div class="text-white font-bold font-18 m-b-20">主服务器</div>
                     <Form
                         ref="primaryOs"
-                        :label-width="100"
+                        class="app-form"
+                        :label-width="110"
                         :model="primaryOs"
                         :rules="rules"
                     >
@@ -262,7 +292,8 @@
                 >
                     <div class="text-white font-bold font-18 m-b-20">从服务器</div>
                     <Form
-                        :label-width="100"
+                        :label-width="110"
+                        class="app-form"
                         ref="standByOs"
                         :model="standByOs"
                         :rules="rules"
@@ -315,7 +346,12 @@
             </div>
 
             <div v-show="current === 1">
-                <div class="flex flex-center justify-center m-t-24">
+                <div
+                    class="flex flex-center justify-center m-t-24"
+                    :style="{
+                        'flex-direction': isSwitchEnd ? 'row-reverse' : 'row'
+                    }"
+                >
                     <Card
                         style="width: 360px; height: 300px"
                         class="app-bg-status app-bg-frame"
@@ -353,11 +389,29 @@
                             </Row>
                         </div>
                     </Card>
-                    <div class="p-s">
+                    <div
+                        class="p-s"
+                        :style="{
+                            'flex-direction': isSwitchEnd ? 'row-reverse' : 'row'
+                        }"
+                    >
                         <div class="db">P</div>
                         <div class="arrow">
-                            <div class="app-icon-arrow-success"></div>
-                            <div class="app-icon-arrow-success m-t-12"></div>
+                            <div
+                                :class="[
+                                    isSwitchEnd
+                                        ? 'app-icon-arrow-success-flip'
+                                        : 'app-icon-arrow-success'
+                                ]"
+                            ></div>
+                            <div
+                                :class="[
+                                    isSwitchEnd
+                                        ? 'app-icon-arrow-success-flip'
+                                        : 'app-icon-arrow-success',
+                                    'm-t-12'
+                                ]"
+                            ></div>
                         </div>
                         <div class="db">S</div>
                     </div>
@@ -443,9 +497,7 @@
                 </div>
             </div>
             <div class="flex justify-center flex-center m-t-24 app-drawer-footer">
-                <Button type="primary" @click="handleOsLogin" :loading="osLoading"
-                    >更新数据库信息</Button
-                >
+                <Button type="primary">更新数据库信息</Button>
             </div>
         </Drawer>
         <!-- 日志详情抽屉 -->
@@ -712,7 +764,9 @@ export default {
             },
 
             // logHeight: 300,
-            arrowTag: false
+            arrowTag: false,
+            // 切换后更改 样式的 标记位
+            isSwitchEnd: JSON.parse(localStorage.getItem('switchStatus'))
         }
     },
     async created() {
@@ -752,7 +806,7 @@ export default {
             this.switchLogData.log = res.data || ''
         },
         // 获取主数据库切换信息状态
-        async getPrimarySwitchStatus() {
+        async getPrimarySwitchStatus(primaryDb) {
             const primary = JSON.parse(localStorage.getItem('primary'))
             const primarySwitchStatus = {
                 data: null,
@@ -790,7 +844,7 @@ export default {
             return primarySwitchStatus
         },
         // 获取从数据库切换信息状态
-        async getStandBySwitchStatus() {
+        async getStandBySwitchStatus(standByDb) {
             const standBy = JSON.parse(localStorage.getItem('standBy'))
             const standBySwitchStatus = {
                 data: null,
@@ -833,7 +887,7 @@ export default {
             }
         },
         // 获取主数据库当前状态
-        async getPrimaryCurrentStatus() {
+        async getPrimaryCurrentStatus(primaryDb) {
             const primary = JSON.parse(localStorage.getItem('primary'))
             const primaryCurrentStatus = {
                 data: null,
@@ -867,7 +921,7 @@ export default {
             return primaryCurrentStatus
         },
         // 获取从数据库当前状态
-        async getStandByCurrentStatus() {
+        async getStandByCurrentStatus(standByDb) {
             const standBy = JSON.parse(localStorage.getItem('standBy'))
             const standByCurrentStatus = {
                 data: null,
@@ -912,7 +966,7 @@ export default {
         // 打开数据库切换按钮
         handleBottom() {
             this.osLoading = false
-            this.current = 1
+            this.current = 0
             this.switchStep = 0
             this.primaryOs.errorMsg = ''
             this.primaryOs.validStatus = false
@@ -939,6 +993,27 @@ export default {
             this.bottomTag = false
         },
         // 切换完成后 的初始化
+        async handleSwitchDone() {
+            // 96 86  86 96
+            // 获取本地保存的主备数据库
+            const primaryDb = JSON.parse(localStorage.getItem('primary'))
+            const standByDb = JSON.parse(localStorage.getItem('standBy'))
+            const primaryIp = primaryDb.ip
+            const standByIp = standByDb.ip
+
+            primaryDb.ip = standByIp
+            standByDb.ip = primaryIp
+
+            localStorage.setItem('primary', JSON.stringify(primaryDb))
+            console.log(primaryDb)
+
+            localStorage.setItem('standBy', JSON.stringify(standByDb))
+            console.log(standByDb)
+            await this.getCurrentStatus()
+            await this.getSwitchStatus()
+            this.isSwitchEnd = !this.isSwitchEnd
+            localStorage.setItem('switchStatus', this.isSwitchEnd)
+        },
 
         // 主数据库切换到备份数据库
         async handleSwitchoverP2s() {
@@ -1095,7 +1170,9 @@ export default {
 
             // }
             await this.handleSwitchoverS2p()
+
             await this.getSwitchLog()
+            await this.handleSwitchDone()
             setTimeout(async () => {
                 this.switchLoading = false
 

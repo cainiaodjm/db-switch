@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-23 09:41:09
- * @LastEditTime: 2022-03-07 13:46:04
+ * @LastEditTime: 2022-03-08 15:03:56
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /inspect-demo/src/views/db/db.vue
@@ -21,7 +21,8 @@
                     <Form
                         ref="primaryForm"
                         :rules="rules"
-                        :label-width="80"
+                        class="app-form"
+                        :label-width="90"
                         :model="primary"
                     >
                         <FormItem label="数据库IP" prop="ip">
@@ -64,7 +65,13 @@
                         <div class="app-icon-standBy m-r-20"></div>
                         <div class="font-18 font-bold l-h-30">从数据库</div>
                     </div>
-                    <Form ref="slaveForm" :rules="rules" :label-width="80" :model="slave">
+                    <Form
+                        ref="slaveForm"
+                        :rules="rules"
+                        class="app-form"
+                        :label-width="90"
+                        :model="slave"
+                    >
                         <FormItem label="数据库IP" prop="ip">
                             <Input v-model="slave.ip" placeholder="请输入"></Input>
                         </FormItem>
@@ -250,6 +257,7 @@ export default {
                     // 存储数据库服务信息到本地
                     localStorage.setItem('primary', JSON.stringify(this.primary))
                     localStorage.setItem('standBy', JSON.stringify(this.slave))
+                    localStorage.setItem('switchStatus', false)
                     // 下一步
                     setTimeout(() => {
                         this.nextLoading = false
